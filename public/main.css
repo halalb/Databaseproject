@@ -1,0 +1,123 @@
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: darkcyan;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: cadetblue;
+}
+
+p,li {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a:link {
+    color: orangered;
+    text-decoration: none;
+    padding:5px;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: tomato;
+    text-decoration: none;
+    padding:5px;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: orangered;
+    padding:5px;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+    text-decoration: none;
+    padding:5px;
+  }
+
+  nav ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Set items to align horizontally */
+  }
+
+  nav li {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 100px; /* Add space between items */
+
+  }
+
+
+  table, tr *{
+    border: 5px solid black;
+  }
+
+  main {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    height: calc(100vh - 150px); 
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: darkcyan;
+}
+  
+
+  footer {
+    text-align: center; 
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    background-color: #f8f9fa; 
+    padding: 10px 0; 
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+  }
+
+#convertform {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: calc(100vh - 150px); 
+}
+
+
+#convertform label {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px; 
+  margin: 1%;
+}
+
+#convertform select, 
+#convertform input, 
+#convertform button {
+  margin: 1%; 
+  padding: 10px; 
+  font-size: 14px; 
+}
+
+
+#convertform button {
+  background-color: darkcyan;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#convertform button:hover {
+  background-color: cadetblue; 
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Conversion History</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+    <h1>Conversion History</h1>
+    <table>
+        
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>From Currency</th>
+                <th>To Currency</th>
+                <th>Amount</th>
+                <th>Converted Amount</th>
+                <th>Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% conversions.forEach(conversion => { %>
+                <tr>
+                    <td><%= conversion.timestamp %></td>
+                    <td><%= conversion.from_currency %></td>
+                    <td><%= conversion.to_currency %></td>
+                    <td><%= conversion.amount %></td>
+                    <td><%= conversion.converted_amount %></td>
+                    <td><%= conversion.conversion_rate %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/users/loggedin">Back</a>
+</body>
+</html>

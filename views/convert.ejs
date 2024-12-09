@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+
+    <title>Convert</title>
+</head>
+<body>
+    <h2>Convert</h2>
+    <header>
+        <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/convert">Convert</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/history">Coversion History</a></li>
+        </ul>
+    </nav>
+    </header>
+
+    <div>
+    <form id="convertform" action="/convertResult" method="POST">
+        <label for="CurrencyFrom">Currency From</label>
+        <select id="CurrencyFrom" name= "from">
+            <option value="GBP">GBP</option>
+            <option value="USD">USD</option>
+            <option value="CAD">CAD</option>
+            <option value="EUR">EUR</option>
+
+        </select>
+        <input type="text" id="amount" name="amount" required>
+        <br>
+        
+        <label for="CurrencyTo">Currency To</label>        
+        <select id="CurrencyTo" name= "to">
+            <option value="GBP">GBP</option>
+            <option value="USD">USD</option>
+            <option value="CAD">CAD</option>
+            <option value="EUR">EUR</option>
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<footer>
+    <p>Get the right exchange rates</p>
+    <p>&copy; 2024 Exchange Rates. All rights reserved.</p>
+</footer>
+</body>
+</html>
