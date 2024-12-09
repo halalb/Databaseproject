@@ -116,6 +116,7 @@ router.post('/loggedin', function(req, res, next) {
 
           if (result === true) {
               req.session.username = user.username; // Save username in the session
+              req.session.userId = user.id; // Save user ID in the session
               res.redirect('/users/loggedin'); // Redirect to the logged-in page
           } else {
               res.status(401).send('Incorrect password');

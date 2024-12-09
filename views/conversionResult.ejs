@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Conversion</title>
+    <title>Conversion Result</title>
 </head>
 <body>
-    <h1>Currency Conversion Result</h1>
+    <h1>Conversion Result</h1>
     <p><strong>From:</strong> <%= from %></p>
     <p><strong>To:</strong> <%= to %></p>
     <p><strong>Amount:</strong> <%= amount %></p>
     <p><strong>Converted Amount:</strong> <%= conversionResult %></p>
-    <a href="./">Back to Home</a>
+    <p><strong>Conversion Date:</strong> <%= conversionDate %></p>
+    <a href="/convert">Convert Again</a>
+    <a href="/history">View Conversion History</a>
 </body>
 </html>

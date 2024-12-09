@@ -18,18 +18,16 @@
                 <th>To Currency</th>
                 <th>Amount</th>
                 <th>Converted Amount</th>
-                <th>Rate</th>
             </tr>
         </thead>
         <tbody>
-            <% conversions.forEach(conversion => { %>
+            <% conversions.forEach(function(conversion) { %>
                 <tr>
-                    <td><%= conversion.timestamp %></td>
+                    <td><%= conversion.formatted_date || 'No Date Available' %></td>
                     <td><%= conversion.from_currency %></td>
                     <td><%= conversion.to_currency %></td>
                     <td><%= conversion.amount %></td>
                     <td><%= conversion.converted_amount %></td>
-                    <td><%= conversion.conversion_rate %></td>
                 </tr>
             <% }) %>
         </tbody>
