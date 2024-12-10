@@ -8,12 +8,21 @@
 </head>
 <body>
     <h1>Conversion Result</h1>
-    <p><strong>From:</strong> <%= from %></p>
-    <p><strong>To:</strong> <%= to %></p>
-    <p><strong>Amount:</strong> <%= amount %></p>
-    <p><strong>Converted Amount:</strong> <%= conversionResult %></p>
-    <p><strong>Conversion Date:</strong> <%= conversionDate %></p>
-    <a href="/convert">Convert Again</a>
-    <a href="/history">View Conversion History</a>
+    <div class="result-container">
+        <div class="result-column">
+            <p><strong>From:</strong> <%= from %></p>
+            <p><strong>To:</strong> <%= to %></p>
+            <p><strong>Amount:</strong> <%= amount %></p>
+        </div>
+        <div class="result-column">
+            <p><strong>Converted Amount:</strong> <%= conversionResult %></p>
+            <p><strong>Conversion Date:</strong> <%= conversionDate %></p>
+        </div>
+    </div>
+    <div class="button-container">
+        <a href="/convert" class="action-button">Convert Again</a>
+        <a href="/history" class="action-button">View Conversion History</a>
+    </div>
 </body>
+
 </html>

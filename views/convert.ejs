@@ -9,7 +9,22 @@
     <title>Convert</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="topnav">
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="/users/register">Register</a></li>
+                    <li><a href="/convert">Convert</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/history">Conversion History</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
     <h1>Currency Converter</h1>
+    <main>
     <form action="/convertResult" method="POST">
         <label for="from">From Currency:</label>
         <select id="from" name="from" required>
@@ -34,7 +49,9 @@
 
         <button type="submit">Convert</button>
     </form>
+    <br>
     <a href="/history">View Conversion History</a>
+</main>
 </body>
 
 <footer>

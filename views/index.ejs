@@ -12,20 +12,21 @@
             <h1>Welcome, <%= username %>!</h1>
         <% } %>
         <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <% if (!isLoggedIn) { %>
-                    <li><a href="/users/register">Register</a></li>
-                    <li><a href="/users/login">Login</a></li>
-                <% } else { %>
-                    <li><a href="/users/logout">Logout</a></li>
-                <% } %>
-                <li><a href="/convert">Convert</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/history">Coversion History</a></li>
-
-
-            </ul>
+            <div class="topnav">
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <% if (!isLoggedIn) { %>
+                        <li><a href="/users/register">Register</a></li>
+                        <li><a href="/users/login">Login</a></li>
+                    <% } else { %>
+                        <li><a href="/users/logout">Logout</a></li>
+                    <% } %>
+                    <li><a href="/convert">Convert</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/history">Conversion History</a></li>
+                </ul>
+            </div>
+            
         </nav>
     </header>
 
