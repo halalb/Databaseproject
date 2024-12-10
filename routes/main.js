@@ -6,8 +6,6 @@ const redirectLogin = (req, res, next) => {
     } 
   }
 
-  
-
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
@@ -135,11 +133,6 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
         res.status(500).send("Unexpected Server Error: Something went wrong on our end.");
     }
 });
-
-
-
-
-
 
 // Route for users conversion history 
 router.get('/history', redirectLogin, (req, res) => {
