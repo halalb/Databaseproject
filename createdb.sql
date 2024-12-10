@@ -17,16 +17,16 @@ GRANT ALL PRIVILEGES ON login.* TO 'hasib'@'localhost';
 
 
 
--- Use login;
+Use login;
 
--- CREATE TABLE conversion_history (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     user_id INT NOT NULL,
---     from_currency VARCHAR(10) NOT NULL,
---     to_currency VARCHAR(10) NOT NULL,
---     amount DECIMAL(10, 2) NOT NULL,
---     converted_amount DECIMAL(10, 2) NOT NULL,
---     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     formatted_date VARCHAR(10) GENERATED ALWAYS AS (DATE_FORMAT(timestamp, '%d/%m/%Y')) STORED,
---     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
--- );
+CREATE TABLE conversion_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    from_currency VARCHAR(10) NOT NULL,
+    to_currency VARCHAR(10) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    converted_amount DECIMAL(10, 2) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    formatted_date VARCHAR(10) GENERATED ALWAYS AS (DATE_FORMAT(timestamp, '%d/%m/%Y')) STORED,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
