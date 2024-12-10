@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+
 const redirectLogin = (req, res, next) => {
   if (!req.session.username ) {
     res.redirect('/users/login') // redirect to the login page
@@ -14,7 +15,8 @@ const redirectLogin = (req, res, next) => {
 
 // Route to render registration form
 router.get('/register', function (req, res, next) {
-    res.render('register.ejs');
+    const isLoggedIn = req.session.username ? true : false; 
+    res.render('register.ejs', { isLoggedIn }); 
 });
 
 // Route to handle user registration
@@ -51,12 +53,7 @@ router.post('/registered',[
             if (err) {
                return res.status(500).send('Error saving user to the database');
             }
-
-            // Respond with a success message
-            let resultMessage = 'Hello ' + req.body.first + ' ' + req.body.last + ', you are now registered! ';
-            resultMessage += 'We will send an email to you at ' + req.body.email + '. ';
-            res.send('Registration successful');
-            // res.redirect('../');
+             res.redirect('./login');
         });
     });
 });
