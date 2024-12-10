@@ -158,26 +158,33 @@ router.get('/history', redirectLogin, (req, res) => {
     });
 });
 
+// Route for searching conversion history by currency
+router.get('/history/search', redirectLogin, (req, res) => {
+    const userId = req.session.userId; 
+    const currency = req.query.currency; 
 
-
-
-
-// Route to fetch exchange rates
-router.get('/exchangerates', async (req, res) => {
-    try {
-        const apiKey = process.env.FIXER_API_KEY;
-        const url = `https://data.fixer.io/api/latest?access_key=${apiKey}&symbols=USD,GBP,EUR`;
-
-        // Fetch exchange rates
-        const response = await axios.get(url);
-        const rates = response.data.rates;
-
-        // Render the rates on a new EJS page
-        res.render('exchangerates.ejs', { rates });
-    } catch (error) {
-        console.error('Error fetching exchange rates:', error);
-        res.status(500).send('Error fetching exchange rates.');
+    if (!currency) {
+        return res.redirect('/history'); 
     }
+
+    // SQL query to fetch records that match the currency
+    const query = `
+        SELECT 
+            DATE_FORMAT(timestamp, '%d/%m/%Y') AS formatted_date, 
+            from_currency, 
+            to_currency, 
+            amount, 
+            converted_amount 
+        FROM conversion_history 
+        WHERE user_id = ? AND (from_currency = ? OR to_currency = ?)`;
+
+    db.query(query, [userId, currency, currency], (err, results) => {
+        if (err) {
+            console.error("Error searching conversion history:", err.message);
+            return res.status(500).send("Error searching conversion history.");
+        }
+        res.render('history.ejs', { conversions: results }); // Render the history page with filtered results
+    });
 });
 
 
