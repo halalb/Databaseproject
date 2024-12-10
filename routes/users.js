@@ -82,7 +82,7 @@ router.get('/loggedin', function(req, res) {
       return res.redirect('./login'); // Redirect to the login page if not authenticated
   }
   // Render the loggedin.ejs page and pass the username from the session
-  res.redirect('./');
+  res.redirect('../');
 });
 
 router.post('/loggedin', function(req, res, next) {
