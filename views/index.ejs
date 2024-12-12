@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width =device-width, initial-scale=1.0 ">
+
     <title>Exchange Rates - Home</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <header>
-        <% if (isLoggedIn) { %>
-            <h1>Welcome, <%= username %>!</h1>
-        <% } %>
-        <nav>
-            <div class="topnav">
-                <ul>
-                    <li><a href="/" class="active">Home</a></li>
-                    <% if (!isLoggedIn) { %>
-                        <li><a href="/users/register">Register</a></li>
-                        <li><a href="/users/login">Login</a></li>
-                    <% } else { %>
-                        <li><a href="/users/logout">Logout</a></li>
-                    <% } %>
-                    <li><a href="/convert">Convert</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/history">Conversion History</a></li>
-                </ul>
-            </div>
+<header>
+<% if (isLoggedIn){ %>
+<h1>Welcome, <%=username%>!</h1>
+<% } %>
+<nav>
+    <div class=" topnav ">
+        <ul>
+        <li><a href="/" class="active">Home</a></li>
+        <% if (!isLoggedIn) { %>
+            <li><a href="/users/register">Register</a></li>
+            <li><a href="/users/login">Login</a></li><% } 
+            else { %>
+            <li><a href="/users/logout">Logout</a></li>
+            <% } %>
+            <li><a href="/convert">Convert</a></li>
+            <li><a href="/about"> About </a> </li>
+            <li><a href="/history">Conversion History</a></li>
+        </ul>
+     </div>
             
-        </nav>
-    </header>
+</nav>
+</header>
 
     <main>
         <p>Welcome to Currency Conversion</p> 

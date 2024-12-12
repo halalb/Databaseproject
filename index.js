@@ -1,35 +1,40 @@
-const expressSanitizer = require('express-sanitizer');
-// Import express, ejs, and other dependencies
-var express = require('express');
-var ejs = require('ejs');
-var mysql = require('mysql2');
-var bcrypt = require('bcrypt');
-var session = require('express-session');
+const expressSanitizer = require('express-sanitizer' );
+// Import express, ejs, and some other dependencies
+var express = require ('express');
+var ejs = require ('ejs');
+var mysql = require ('mysql2');
+var bcrypt = require ('bcrypt');
+var session = require ('express-session');
 var validator = require('express-validator');
-const axios = require('axios');
+const axios =require ('axios');
 
 // Create the express application 
 const app = express();
-const port = 8000;
+const port = 8000 ;
 
-app.use(expressSanitizer());
+app.use( expressSanitizer());
 // Set up view engine and static files
-app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
-app.use(session({
+app.set( 'view engine', 'ejs' );
+
+app.use( express.urlencoded({ extended: true }));
+
+app.use(session(
+    {
     secret: 'somerandomstuff',
     resave: false,
     saveUninitialized: false,
+
     cookie: { expires: 600000 }
 }));
-app.use(express.static(__dirname + '/public'));
-app.set('views', __dirname + '/views');
+app.use( express.static(__dirname+'/public'));
+
+app.set('views',__dirname +'/views');
 
 // CurrencyLayer API Key
 const API_KEY = 'd166de82237f0f32e4f8f3f55c06a622';
 
-const apiRoutes = require('./routes/api');
-app.use('/api', apiRoutes);
+const apiRoutes = require('./routes/api') ;
+app.use('/api', apiRoutes );
 
 
 
@@ -42,7 +47,7 @@ const db = mysql.createConnection({
 });
 
 // Connect to the database
-db.connect((err) => {
+db.connect((err) =>{
     if (err) {
         throw err;
     }
@@ -50,11 +55,10 @@ db.connect((err) => {
 });
 global.db = db;
 
-const mainRoutes = require("./routes/main");
+const mainRoutes = require( "./routes/main");
 app.use('/', mainRoutes);
 
-const usersRoutes = require('./routes/users');
+const usersRoutes = require( './routes/users');
 app.use('/users', usersRoutes);
 
-// Application listens
-app.listen(port, () => console.log(`Node app listening on port ${port}!`));
+app.listen(port, () => console.log(`Node app listening on port  ${port}!` ));

@@ -1,6 +1,6 @@
 const redirectLogin = (req, res, next) => {
     if (!req.session.username ) {
-      res.redirect('./users/login') // redirect user to the login page
+      res.redirect('./users/login') 
     } else { 
         next (); 
     } 
@@ -35,13 +35,12 @@ router.post('/convertResult', async (req, res) => {
     const { from, to, amount } = req.body;
     const userId = req.session.userId;
 
-    // Validate input
     if (!from || !to || !amount || isNaN(amount)) {
-        console.error("Validation Error: Invalid input values.");
+        console.error("Validation Error:Invalid input");
         return res.status(400).send("Validation Error: Please provide valid 'from', 'to', and numeric 'amount' values.");
     }
     if (!userId) {
-        console.error("Authorization Error: User ID is missing in the session.");
+        console.error("Authorization Error: User ID missing.");
         return res.status(403).send("Authorization Error: You are not logged in.");
     }
 
@@ -51,21 +50,18 @@ router.post('/convertResult', async (req, res) => {
         const url = `http://api.currencylayer.com/convert?access_key=${API_KEY}&from=${from}&to=${to}&amount=${amount}`;
         const response = await axios.get(url);
 
-        // Check API response success
         if (!response.data.success) {
             console.error("CurrencyLayer API Error:", response.data.error);
             return res.status(400).send("API Error: " + response.data.error.info);
         }
 
         const conversionResult = response.data.result;
-let conversionRate = response.data.info.quote; // Use let instead of const
+let conversionRate = response.data.info.quote;
 
-// Handle same currency conversion
 if (from === to) {
-    conversionRate = 1.0; // No error now
+    conversionRate = 1.0; 
 }
 
-// Validate conversion rate
 if (isNaN(conversionRate) || conversionRate === null || conversionRate === undefined) {
     console.error("Error: Invalid conversion rate received from API:", conversionRate);
     return res.status(400).send("Error: Invalid conversion rate received from the API.");
@@ -76,7 +72,6 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
     return res.status(400).send("Error: Invalid conversion rate received from the API.");
     }
 
-        // Insert into database
         const insertSql = `
             INSERT INTO conversion_history (user_id, from_currency, to_currency, amount, converted_amount, conversion_rate) 
             VALUES (?, ?, ?, ?, ?, ?)`;
@@ -87,12 +82,12 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
 
         db.query(insertSql, params, (err, insertResults) => {
             if (err) {
-                console.error("Database Error: Failed to insert conversion history.", err.message);
-                return res.status(500).send("Database Error: Could not insert conversion history.");
+                console.error("Database Error", err.message);
+                return res.status(500).send("Database Error");
             }
 
             console.log("Insert successful. Insert ID:", insertResults.insertId);
-
+    
             const selectSql = `
                 SELECT 
                     from_currency, 
@@ -110,8 +105,8 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
                 }
 
                 if (selectResults.length === 0) {
-                    console.error("Logic Error: No record found with the inserted ID.");
-                    return res.status(500).send("Logic Error: Inserted record not found.");
+                    console.error("Logic Error: No record found.");
+                    return res.status(500).send("Logic Error: record not found.");
                 }
 
                 const { from_currency, to_currency, amount, converted_amount, formatted_date } = selectResults[0];
@@ -128,13 +123,12 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
         });
     } catch (error) {
         console.error("Unexpected Server Error:", error.message);
-        res.status(500).send("Unexpected Server Error: Something went wrong on our end.");
+        res.status(500).send("Unexpected Server Error: Something went wrong");
     }
 });
 
 router.get('/history', redirectLogin, (req, res) => {
     const userId = req.session.userId; 
-
     const query = `
         SELECT 
             DATE_FORMAT(timestamp, '%d/%m/%Y') AS formatted_date, 
@@ -147,14 +141,13 @@ router.get('/history', redirectLogin, (req, res) => {
 
     db.query(query, [userId], (err, results) => {
         if (err) {
-            console.error("Error fetching conversion history:", err.message);
-            return res.status(500).send("Error fetching conversion history.");
+            console.error("Error fetching history:", err.message);
+            return res.status(500).send("Error fetching history.");
         }
         res.render('history.ejs', { conversions: results });
     });
 });
 
-// Route for searching conversion history by currency
 router.get('/history/search', redirectLogin, (req, res) => {
     const userId = req.session.userId; 
     const currency = req.query.currency; 
@@ -163,7 +156,6 @@ router.get('/history/search', redirectLogin, (req, res) => {
         return res.redirect('/history'); 
     }
 
-    // SQL query to fetch records that matches the currency
     const query = `
         SELECT 
             DATE_FORMAT(timestamp, '%d/%m/%Y') AS formatted_date, 
@@ -176,10 +168,10 @@ router.get('/history/search', redirectLogin, (req, res) => {
 
     db.query(query, [userId, currency, currency], (err, results) => {
         if (err) {
-            console.error("Error searching conversion history:", err.message);
-            return res.status(500).send("Error searching conversion history.");
+            console.error("Error searching history:", err.message);
+            return res.status(500).send("Error searching history.");
         }
-        res.render('history.ejs', { conversions: results }); // Renders the history page with filtered results
+        res.render('history.ejs', { conversions: results }); 
     });
 });
 
