@@ -26,7 +26,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 
 // CurrencyLayer API Key
-const API_KEY = '486ad0ca136085b77d2f92679048bcb0';
+//const API_KEY = '486ad0ca136085b77d2f92679048bcb0';
+const API_KEY = 'd166de82237f0f32e4f8f3f55c06a622';
 
 
 

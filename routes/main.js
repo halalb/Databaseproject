@@ -11,7 +11,8 @@ const axios = require("axios");
 const router = express.Router();
 
 // CurrencyLayer API Key
-const API_KEY = '486ad0ca136085b77d2f92679048bcb0';
+// const API_KEY = '486ad0ca136085b77d2f92679048bcb0';
+const API_KEY = 'd166de82237f0f32e4f8f3f55c06a622';
 
 // Home Route
 router.get('/', (req, res) => {
