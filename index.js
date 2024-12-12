@@ -8,12 +8,12 @@ var session = require('express-session');
 var validator = require('express-validator');
 const axios = require('axios');
 
-// Create the express application object
+// Create the express application 
 const app = express();
 const port = 8000;
 
 app.use(expressSanitizer());
-// Set up the view engine and static files
+// Set up view engine and static files
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
@@ -26,8 +26,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 
 // CurrencyLayer API Key
-//const API_KEY = '486ad0ca136085b77d2f92679048bcb0';
 const API_KEY = 'd166de82237f0f32e4f8f3f55c06a622';
+
+const apiRoutes = require('./routes/api');
+app.use('/api', apiRoutes);
 
 
 
@@ -46,15 +48,13 @@ db.connect((err) => {
     }
     console.log('Connected to database');
 });
-global.db = db; // Make the database connection available globally
+global.db = db;
 
-// Load the route handlers
 const mainRoutes = require("./routes/main");
 app.use('/', mainRoutes);
 
-// Load the route handlers for /users
 const usersRoutes = require('./routes/users');
 app.use('/users', usersRoutes);
 
-// Start the web app listening
+// Application listens
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));

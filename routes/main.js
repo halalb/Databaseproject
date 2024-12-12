@@ -1,8 +1,8 @@
 const redirectLogin = (req, res, next) => {
     if (!req.session.username ) {
-      res.redirect('./users/login') // redirect to the login page
+      res.redirect('./users/login') // redirect user to the login page
     } else { 
-        next (); // move to the next middleware function
+        next (); 
     } 
   }
 
@@ -11,7 +11,6 @@ const axios = require("axios");
 const router = express.Router();
 
 // CurrencyLayer API Key
-// const API_KEY = '486ad0ca136085b77d2f92679048bcb0';
 const API_KEY = 'd166de82237f0f32e4f8f3f55c06a622';
 
 // Home Route
@@ -72,12 +71,10 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
     return res.status(400).send("Error: Invalid conversion rate received from the API.");
 }
 
-
-        // Validate conversion rate
-        if (isNaN(conversionRate) || conversionRate === null || conversionRate === undefined) {
-            console.error("Error: Invalid conversion rate received from API:", conversionRate);
-            return res.status(400).send("Error: Invalid conversion rate received from the API.");
-        }
+if (isNaN(conversionRate) || conversionRate === null || conversionRate === undefined) {
+    console.error("Error: Invalid conversion rate received from API:", conversionRate);
+    return res.status(400).send("Error: Invalid conversion rate received from the API.");
+    }
 
         // Insert into database
         const insertSql = `
@@ -135,11 +132,9 @@ if (isNaN(conversionRate) || conversionRate === null || conversionRate === undef
     }
 });
 
-// Route for users conversion history 
 router.get('/history', redirectLogin, (req, res) => {
-    const userId = req.session.userId; // Ensure `userId` is stored in the session upon login
+    const userId = req.session.userId; 
 
-    // Fetch history for the logged-in user
     const query = `
         SELECT 
             DATE_FORMAT(timestamp, '%d/%m/%Y') AS formatted_date, 
@@ -168,7 +163,7 @@ router.get('/history/search', redirectLogin, (req, res) => {
         return res.redirect('/history'); 
     }
 
-    // SQL query to fetch records that match the currency
+    // SQL query to fetch records that matches the currency
     const query = `
         SELECT 
             DATE_FORMAT(timestamp, '%d/%m/%Y') AS formatted_date, 
@@ -184,7 +179,7 @@ router.get('/history/search', redirectLogin, (req, res) => {
             console.error("Error searching conversion history:", err.message);
             return res.status(500).send("Error searching conversion history.");
         }
-        res.render('history.ejs', { conversions: results }); // Render the history page with filtered results
+        res.render('history.ejs', { conversions: results }); // Renders the history page with filtered results
     });
 });
 
