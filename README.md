@@ -113,16 +113,6 @@ node index.js
 
 ---
 
-## 📸 Screenshots
-
-| Login Page                    | Conversion Page                   | History Table                     |
-| ----------------------------- | --------------------------------- | --------------------------------- |
-| ![Login](./path/to/login.png) | ![Convert](./path/to/convert.png) | ![History](./path/to/history.png) |
-
-*(Replace with actual paths or GitHub-hosted images)*
-
----
-
 ## ✅ Future Improvements
 
 * Add multi-user currency conversion stats
